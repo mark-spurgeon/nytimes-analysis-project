@@ -1,0 +1,13 @@
+
+__pycache__/*
+__pycache__
+.DS_Store
+
+#Where API credentials are stored
+credentials.py
+
+#Data : I'm pretty sure I can't just show it on a public repo, though anyone can access it
+data/stage1/*
+data/stage2/*
+data/stage3/*
+data/stage4/*
