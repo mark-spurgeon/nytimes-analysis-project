@@ -7,7 +7,16 @@ __pycache__
 credentials.py
 
 #Data : I'm pretty sure I can't just show it on a public repo, though anyone can access it
-data/stage1/*
-data/stage2/*
-data/stage3/*
-data/stage4/*
+data/stage1/*.json
+data/stage2/*.json
+data/stage3/*.json
+data/stage4/*.json
+data/stage5/*.json
+data/stage6/*.json
+data/stage7/*.json
+data/stage8/*.json
+data/stage9/*.json
+data/stage10/*.json
+
+#Tasks : these are generated
+tasks/*.txt

@@ -44,7 +44,7 @@ if taskbundle.hasLoadedList:
             if data:
                 newdat = []
                 jsonData = json.dumps(data, indent=4, sort_keys=True)
-                file = open("retrievedData/{}.json".format(args[1]),"w")
+                file = open("data/stage1/{}.json".format(args[1]),"w")
                 file.write(jsonData)
                 file.close()
                 taskbundle.changeStatus(id, 'yes')
@@ -53,6 +53,6 @@ if taskbundle.hasLoadedList:
                 taskbundle.changeStatus(id, 'error')
         except :
             taskbundle.changeStatus(id, 'error')
-            file = open("retrievedData/{}.txt".format(args[1]),"w")
+            file = open("data/stage1/{}.txt".format(args[1]),"w")
             file.write(r.text)
             file.close()

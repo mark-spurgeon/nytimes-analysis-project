@@ -42,6 +42,6 @@ for year in year_list :
 for u in all_urls:
     taskbundleString += u.get('url')+" "+u.get('id')+" "+"--"+",\n"
 
-stage1_taskbundle = open('TaskGroups/stage1.txt',"w")
+stage1_taskbundle = open('tasks/stage1.txt',"w")
 stage1_taskbundle.write(taskbundleString)
 stage1_taskbundle.close()
