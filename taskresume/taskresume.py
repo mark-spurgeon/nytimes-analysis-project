@@ -21,7 +21,6 @@ class TaskBundle :
         self.fileobject = None
         self.filename=""
 
-
     def _updateString(self):
         stringue = ""
         for task in self.wholelist:
@@ -69,23 +68,24 @@ class TaskBundle :
             self.wholelist=listofformattedtasks
             return listofformattedtasks
 
+    def getStatus(self, stat):
+        if stat=="error":
+            return self.status_error
+        elif stat=="yes":
+            return self.status_yes
+        elif stat=="no":
+            return self.status_no
 
     def changeStatus(self, id, status):
         newtasks = []
         for task in self.wholelist:
             if task.get('id')== id:
-                if status=="error":
-                    task['status']=self.status_error
-                elif status=="yes":
-                    task['status']=self.status_yes
-                elif status=="no":
-                    task['status']=self.status_no
+                task['status']=self.getStatus(status)
             newtasks.append(task)
 
         self.wholelist=newtasks
         self._selectList()
         self._updateString()
-
         if self.usefile:
             f = open(self.filename, "w")
             f.write(self.outputstring)
@@ -117,3 +117,37 @@ class TaskBundle :
         except :
             print ("File loading error : either the file doesn't exist or it is not permited to read and write to it.")
             return False
+
+    def createFile(self, filename):
+        try :
+            fileobject = open(filename, "w")
+            self.usefile=True
+            self.filename=filename
+            fileobject.write('')
+            fileobject.close()
+        except :
+            print("File creating error")
+            return False
+
+    def saveFile(self):
+        if self.usefile == True and self.filename :
+            l = open(self.filename, "w")
+            self._selectList()
+            self._updateString()
+            l.write(self.outputstring)
+            l.close()
+        else :
+            print("Error : could'nt write to file '{}'".format(self.filename))
+    def addTask(self, taskdict):
+        if taskdict.get('args') and taskdict.get('status'):
+            newtask = {}
+            newtask['args'] = taskdict.get('args')
+            newtask['status'] = self.getStatus(taskdict.get('status'))
+            newtask['id'] = len(self.wholelist)
+            #add the task to the list
+            self.wholelist.append(newtask)
+            self._selectList()
+            self._updateString()
+            return newtask
+        else:
+            return None

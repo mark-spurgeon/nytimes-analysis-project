@@ -14,14 +14,19 @@
 #
 ##
 
+from taskresume.taskresume import TaskBundle
+
+taskbundle = TaskBundle()
+taskbundle.createFile('tasks/stage1.txt')
 
 base_url = "https://api.nytimes.com/svc/archive/v1/{0}/{1}.json" #where 0 is the year, 1 is the month
 year_list = [2015, 2016, 2017, 2018]
 month_list = range(13) # march : 3
 
 
-taskbundleString = ""
 all_urls = []
+
+
 
 for year in year_list :
     for month in month_list:
@@ -40,8 +45,6 @@ for year in year_list :
                 })
 
 for u in all_urls:
-    taskbundleString += u.get('url')+" "+u.get('id')+" "+"--"+",\n"
+    taskbundle.addTask({"args":[u.get('url')], "status":"no"})
 
-stage1_taskbundle = open('tasks/stage1.txt',"w")
-stage1_taskbundle.write(taskbundleString)
-stage1_taskbundle.close()
+taskbundle.saveFile()

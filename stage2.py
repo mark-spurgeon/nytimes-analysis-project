@@ -82,4 +82,23 @@ stage2_json = open('data/stage2/articles.json', 'w')
 jsonstr = json.dumps(mainjson, indent=2, sort_keys=True)
 stage2_json.write(jsonstr)
 stage2_json.close()
+
+
 notify("Finished task", "{} articles have been selected".format(len(resultslist)))
+
+# create a task bundle
+from taskresume.taskresume import TaskBundle
+
+taskbundle = TaskBundle()
+taskbundle.createFile('tasks/stage2.txt')
+
+for res in resultslist:
+    args = [
+    res.get('id'),
+    res.get('url')
+    ]
+    taskbundle.addTask({'args':args, 'status':'no'})
+
+taskbundle.saveFile()
+
+notify("Created a task taskbundle", "{} tasks to complete".format(len(resultslist)))
