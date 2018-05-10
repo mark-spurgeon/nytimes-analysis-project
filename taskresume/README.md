@@ -1,3 +1,5 @@
+*Copyied from [this repo](https://github.com/the-duck/taskresume.py)*
+
 taskresume.py
 =======
 

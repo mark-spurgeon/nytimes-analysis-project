@@ -22,7 +22,7 @@ import time
 #TEST DOWN BELOW
 
 taskbundle = TaskBundle(slash_task=",\n")
-taskbundle.loadFile('TaskGroups/stage1.txt')
+taskbundle.loadFile('tasks/stage1.txt')
 
 if taskbundle.hasLoadedList:
     for task in taskbundle.list:
@@ -43,8 +43,8 @@ if taskbundle.hasLoadedList:
 
             if data:
                 newdat = []
-                jsonData = json.dumps(data, indent=4, sort_keys=True)
-                file = open("data/stage1/{}.json".format(args[1]),"w")
+                jsonData = json.dumps(data, indent=2, sort_keys=True)
+                file = open("data/stage1/{}.json".format(args[1]),"w", encoding="utf-8")
                 file.write(jsonData)
                 file.close()
                 taskbundle.changeStatus(id, 'yes')
@@ -53,6 +53,6 @@ if taskbundle.hasLoadedList:
                 taskbundle.changeStatus(id, 'error')
         except :
             taskbundle.changeStatus(id, 'error')
-            file = open("data/stage1/{}.txt".format(args[1]),"w")
+            file = open("data/stage1/{}.txt".format(args[1]),"w", encoding="utf-8")
             file.write(r.text)
             file.close()
